@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- MY STYLE CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1 class="text-center my-2">QUẢN LÝ CÔNG VIỆC</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- PANEL -->
+            <div class="col-md-3 text-center px-0">
+                <div class="header header--left d-flex align-items-center">
+                    <img src="./img/user_1.jpg" class="ml-2 user" alt="">
+                    <h3 class="text-white d-inline font-weight-light ml-2">Lê Quang Song</h3>
+                </div>
+
+                <button type="button" class="btn my-3 btn--newTask" data-toggle="modal" data-target="#modalTask">
+                    <i class="fa fa-pencil-square-o"></i>
+                    Tạo Task mới
+                </button>
+
+                <!-- Filter -->
+                <div class="px-3">
+                    <div class="filter filter--progress">
+                        <ul class="list-unstyled text-left">Lọc
+                            <li class="py-1 display-5 lead">
+                                <i class="fa fa-check-square-o mr-2"></i>Hoàn thành</li>
+                            <li class="py-1 display-5 lead">
+                                <i class="fa fa-trash-o mr-2"></i>Hủy bỏ</li>
+                        </ul>
+                    </div>
+
+                    <div class="filter filter--label">
+                        <ul class="list-unstyled text-left">Nhãn
+                            <li class="py-1 display-5 lead">
+                                <i class="fa fa-circle mr-2"></i>Frontend</li>
+                            <li class="py-1 display-5 lead">
+                                <i class="fa fa-circle mr-2"></i>Backend</li>
+                            <li class="py-1 display-5 lead">
+                                <i class="fa fa-circle mr-2"></i>API</li>
+                            <li class="py-1 display-5 lead">
+                                <i class="fa fa-circle mr-2"></i>Issue</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group text-left">
+                        <label for="sel1">Độ ưu tiên</label>
+                        <select class="form-control">
+                            <option class="font-weight-bold">Tất cả</option>
+                            <option class="text-info font-weight-bold">Thấp</option>
+                            <option class="text-success font-weight-bold">Trung bình</option>
+                            <option class="text-danger font-weight-bold">Cao</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group text-left">
+                        <label>Sắp xếp theo công việc</label>
+                        <select class="form-control">
+                            <option>Từ A đến Z</option>
+                            <option>Từ Z đến A</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- DISPLAY -->
+            <div class="col-md-9 px-0">
+                <div class="container-fluid px-0">
+                    <div class="row header header--right d-flex align-items-center mx-0">
+                        <div class="col-md-6">
+                            <div class=" d-flex justify-content-between">
+                                <h3 class="text-left ml-2 ">Danh sách công việc</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group text-left my-0">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm công việc">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-3">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">STT</th>
+                                <th class="text-center">Công việc</th>
+                                <th class="text-center">Nhãn</th>
+                                <th class="text-center">Độ ưu tiên</th>
+                                <th class="text-center">Người thực hiện</th>
+                                <th class="text-center">Xử lý</th>
+                                <th class="text-center">Tình trạng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center">Soạn ReactJS</td>
+                                <td class="text-center">
+                                    <i class="fa fa-circle" style="color: #389E0D"></i>
+                                    <i class="fa fa-circle" style="color: #13C2C2"></i>
+                                </td>
+                                <td class="text-danger font-weight-bold text-center">Cao</td>
+                                <td class="text-center">
+                                    <img src="./img/user_2.jpg" class="user" alt="">
+                                    <img src="./img/user_3.jpg" class="user" alt="">
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-outline-primary">Sửa</button>
+                                    <button type="button" class="btn btn-outline-success">Xong</button>
+                                    <button type="button" class="btn btn-outline-danger">Xóa</button>
+                                </td class="text-center">
+                                <td class="text-center">
+                                    <i class="fa fa-check-square-o mr-2"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">2</td>
+                                <td class="text-center">Soạn Python</td>
+                                <td class="text-center">
+                                    <i class="fa fa-circle" style="color: #722ED1"></i>
+                                    <i class="fa fa-circle" style="color: #CF1322"></i>
+                                    <i class="fa fa-circle" style="color: #389E0D"></i>
+                                </td>
+                                <td class="text-danger font-weight-bold text-center">Cao</td>
+                                <td class="text-center">
+                                    <img src="./img/user_3.jpg" class="user" alt="">
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-outline-primary">Sửa</button>
+                                    <button type="button" class="btn btn-outline-success">Xong</button>
+                                    <button type="button" class="btn btn-outline-danger">Xóa</button>
+                                </td>
+                                <td class="text-center">
+                                    <i class="fa fa-check-square-o mr-2"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="modalTask">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm công việc</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="taskName">Tên công việc:</label>
+                        <input type="text" class="form-control" id="taskName">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả:</label>
+                        <textarea class="form-control" rows="2" id="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="priority">Độ ưu tiên:</label>
+                        <select class="form-control" id="priority">
+                            <option>Thấp</option>
+                            <option>Trung bình</option>
+                            <option>Cao</option>
+                        </select>
+                    </div>
+
+                    <label for="">Người thực hiện:</label>
+                    <br>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Nghĩa Văn
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Minh Tuấn
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Trung Hiếu
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Tấn Khải
+                        </label>
+                    </div>
+                    <br><br>
+
+                    <label for="">Nhãn:</label>
+                    <br>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Frontend
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Backend
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">API
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Issue
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
