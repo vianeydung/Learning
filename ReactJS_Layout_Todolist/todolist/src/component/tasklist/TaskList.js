@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import TaskItem from './TaskItem';
-
 class TaskList extends Component {
   render() {
+    let {data} = this.props;
+    let elmItem = data.map((value, index)=> {
+      return  <TaskItem item={value} index={index}/>;
+    });
     return (
       <div className="col-md-9 px-0">
         <div className="container-fluid px-0">
@@ -39,10 +42,7 @@ class TaskList extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      <TaskItem />
-                      <TaskItem />
-                      <TaskItem />
-                      
+                      {elmItem}
                     </tbody>
           </table>
         </div>

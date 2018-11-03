@@ -4,7 +4,20 @@ import './App.css';
 import Control from './component/controls/Control';
 import TaskList from './component/tasklist/TaskList';
 import Modal from './component/modal/Modal';
+import TaskData from './data/TasksData';
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {data:null};
+  }
+  componentWillMount() {
+    this.setState({data:TaskData});
+    
+  }
+  componentDidMount() {
+    console.log(this.state.data);
+  }
+  
   render() {
     return (
       <div className="App">
@@ -15,7 +28,7 @@ class App extends Component {
             {/* PANEL */}
             <Control></Control>
             {/* DISPLAY */}
-            <TaskList></TaskList>
+            <TaskList data={this.state.data}></TaskList>
           </div>
         </div>
         {/* The Modal */}
