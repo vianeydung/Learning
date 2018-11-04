@@ -27,6 +27,18 @@ class TaskItem extends Component {
         break;
     }
   }
+  getClassPriority(value) {
+    switch (value) {
+      case 1:
+        return "danger";
+      case 2:
+        return "warning";
+      case 3:
+        return "info";
+      default:
+        break;
+    }
+  }
   getStatus(status){
     switch (status) {
       case 1:
@@ -61,7 +73,7 @@ class TaskItem extends Component {
         <td className="text-center">
           {elmLabels}
         </td>
-        <td className="text-danger font-weight-bold text-center">
+        <td className={`text-${this.getClassPriority(item.priority)} font-weight-bold text-center`}>
           {this.getPriority(item.priority)}
                       </td>
         <td className="text-center">
