@@ -1,28 +1,71 @@
 import React, { Component } from 'react';
 
 class TaskItem extends Component {
+  getColor(value) {
+    switch (value) {
+      case "Frontend":
+        return "#389E0D";
+      case "Backend":
+        return "#722ED1";
+      case "API":
+        return "#13C2C2";
+      case "Issue":
+        return "#CF1322";
+      default:
+        break;
+    }
+  }
+  getPriority(value) {
+    switch (value) {
+      case 1:
+        return "Cao";
+      case 2:
+        return "Trung Bình";
+      case 3:
+        return "Thấp";
+      default:
+        break;
+    }
+  }
+  getStatus(status){
+    switch (status) {
+      case 1:
+          return "fa fa-anchor";
+      case 2:
+          return "fa fa-spinner";
+      case 3:
+          return "fa fa-check-square-o";
+      case 0:
+          return "fa fa-anchor mr-2";
+    
+      default:
+        break;
+    }
+  }
   render() {
-    let {index, value} = this.props;
+    let {item, index} = this.props;//ánh xạ đúng tên.
+    let elmLabels = item.labelArr.map((value) => {
+      return <i
+      className="fa fa-circle"
+      style={{ color: `${this.getColor(value)}` }}
+    />
+    });
+    let elmUser = item.memberIDArr.map((value) => {
+      return <img src={`./img/${value}.jpg`} className="user" alt="user" />
+    });
+    
     return (
       <tr>
         <td className="text-center">{index + 1}</td>
-        <td className="text-center">Soạn ReactJS</td>
+        <td className="text-center">{item.name}</td>
         <td className="text-center">
-          <i
-            className="fa fa-circle"
-            style={{ color: "#389E0D" }}
-          />
-          <i
-            className="fa fa-circle"
-            style={{ color: "#13C2C2" }}
-          />
+          {elmLabels}
         </td>
         <td className="text-danger font-weight-bold text-center">
-          Cao
+          {this.getPriority(item.priority)}
                       </td>
         <td className="text-center">
-          <img src="./img/user_2.jpg" className="user" alt="user" />
-          <img src="./img/user_3.jpg" className="user" alt="user" />
+          {elmUser}
         </td>
         <td className="text-center d-flex align-items-center">
           <button
@@ -30,7 +73,7 @@ class TaskItem extends Component {
             className="btn btn-outline-primary mt-2"
           >
             Sửa
-                          </button>
+          </button>
 
           <div className="form-group ml-2">
             <label></label>
@@ -44,7 +87,7 @@ class TaskItem extends Component {
           </div>
         </td>
         <td className="text-center">
-          <i className="fa fa-check-square-o mr-2" />
+          <i className={`${this.getStatus(item.status)} mr-2`} />
         </td>
       </tr>
     );
