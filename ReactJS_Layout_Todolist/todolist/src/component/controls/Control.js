@@ -4,9 +4,14 @@ import FilterLabel from './FilterLabel';
 import FilterProgress from './FilterProgress'; 
 import FilterPriority from './FilterPriority';
 import Sort from './Sort';
-
 class Control extends Component {
+  handleClick = (event) => {
+    event.preventDefault();
+    //localStorage.setItem('task', JSON.stringify(data));
+    console.log("saved data");
+  }
   render() {
+    //let data = {data};
     return (
       <div className="col-md-3 text-center px-0">
         <div className="header header--left d-flex align-items-center">
@@ -14,6 +19,7 @@ class Control extends Component {
           <h3 className="text-white d-inline font-weight-light ml-2">Lê Quang Song</h3>
         </div>
         <CreateNewTask></CreateNewTask>
+        <button type="button" className="btn btn-primary px-3" onClick={this.handleClick}>Save Data</button>
         {/* Filter */}
         <div className="px-3">
           <FilterProgress></FilterProgress>

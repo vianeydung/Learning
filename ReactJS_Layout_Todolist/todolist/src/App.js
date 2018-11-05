@@ -8,14 +8,17 @@ import TaskData from './data/TasksData';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {data:null};
+    this.state = {task:null};
   }
   componentWillMount() {
-    this.setState({data:TaskData});
-    
+    if("task" in localStorage){
+      this.setState({task:JSON.parse(localStorage.getItem('task'))});
+    } else {
+      localStorage.setItem('task', JSON.stringify(TaskData));
+    }
   }
   componentDidMount() {
-    console.log(this.state.data);
+    console.log(this.state.task);
   }
   
   render() {
@@ -28,7 +31,7 @@ class App extends Component {
             {/* PANEL */}
             <Control></Control>
             {/* DISPLAY */}
-            <TaskList data={this.state.data}></TaskList>
+            <TaskList data={this.state.task}></TaskList>
           </div>
         </div>
         {/* The Modal */}

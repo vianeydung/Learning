@@ -56,14 +56,15 @@ class TaskItem extends Component {
   }
   render() {
     let {item, index} = this.props;//ánh xạ đúng tên.
-    let elmLabels = item.labelArr.map((value) => {
+    let elmLabels = item.labelArr.map((value, idx) => {
       return <i
+      key={idx}
       className="fa fa-circle"
       style={{ color: `${this.getColor(value)}` }}
     />
     });
-    let elmUser = item.memberIDArr.map((value) => {
-      return <img src={`./img/${value}.jpg`} className="user" alt="user" />
+    let elmUser = item.memberIDArr.map((value, idx) => {
+      return <img key={idx} src={`./img/${value}.jpg`} className="user" alt="user" />
     });
     
     return (
