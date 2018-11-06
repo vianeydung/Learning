@@ -6,7 +6,7 @@ import FilterPriority from './FilterPriority';
 import Sort from './Sort';
 class Control extends Component {
   handleClick = (event) => {
-    event.preventDefault();
+    //event.preventDefault();
     //localStorage.setItem('task', JSON.stringify(data));
     console.log("saved data");
   }

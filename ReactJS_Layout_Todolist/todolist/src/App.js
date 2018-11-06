@@ -15,12 +15,17 @@ class App extends Component {
       this.setState({task:JSON.parse(localStorage.getItem('task'))});
     } else {
       localStorage.setItem('task', JSON.stringify(TaskData));
+      this.setState({task:JSON.parse(localStorage.getItem('task'))});
     }
   }
   componentDidMount() {
     console.log(this.state.task);
   }
-  
+  handleRefresh = (value) => {
+    if(value && ("task" in localStorage)){
+      this.setState({task:JSON.parse(localStorage.getItem('task'))});
+    }
+  }
   render() {
     return (
       <div className="App">
@@ -35,7 +40,7 @@ class App extends Component {
           </div>
         </div>
         {/* The Modal */}
-        <Modal></Modal> 
+        <Modal refresh={this.handleRefresh}></Modal> 
         </div>
       </div>
     );
