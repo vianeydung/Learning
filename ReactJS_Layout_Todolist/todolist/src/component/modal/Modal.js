@@ -19,15 +19,11 @@ class Modal extends Component {
   onSubmit = (event) => {
     //event.preventDefault();
     let data = TasksData;
-    data.push({
-      id: this.state.id,
-      name: this.state.name,
-      labelArr: this.state.labelArr,
-      priority: this.state.priority, 
-      memberIDArr: this.state.memberIDArr,
-      status: this.state.status, 
-      description: this.state.description
-    });
+    if("task" in localStorage){
+      data = JSON.parse(localStorage.getItem('task'));
+    } 
+    
+    data.push(this.state);
     localStorage.setItem('task', JSON.stringify(data));//update data to store(local storage)
     this.props.refresh(true);
     //console.log(data);
@@ -51,12 +47,6 @@ class Modal extends Component {
       labelArr: newValue
     });
     //console.log(this.state.labelArr);
-  }
-  submit(event){
-    event.preventDefault();
-  }
-  addNewTask(){
-    
   }
   render() {
     return (
@@ -82,9 +72,9 @@ class Modal extends Component {
                 <div className="form-group">
                   <label htmlFor="priority">Độ ưu tiên:</label>
                   <select className="form-control" id="priority"  onChange={this.onChange} name="priority">
-                    <option>Thấp</option>
-                    <option>Trung bình</option>
-                    <option>Cao</option>
+                    <option value="3">Thấp</option>
+                    <option value="2">Trung bình</option>
+                    <option value="1">Cao</option>
                   </select>
                 </div>
                 <label>Người thực hiện:</label>
