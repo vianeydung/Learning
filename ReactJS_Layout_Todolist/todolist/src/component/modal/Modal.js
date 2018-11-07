@@ -36,6 +36,11 @@ class Modal extends Component {
       [event.target.name]: event.target.value
     })
   }
+  onPriorityChange = (event) => {
+    this.setState({
+      priority: parseInt(event.target.value)
+    });
+  }
   memberChanged = (newValue) => {
     this.setState({
       memberIDArr: newValue
@@ -71,7 +76,7 @@ class Modal extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="priority">Độ ưu tiên:</label>
-                  <select className="form-control" id="priority"  onChange={this.onChange} name="priority">
+                  <select className="form-control" id="priority"  onChange={this.onPriorityChange} name="priority">
                     <option value="3">Thấp</option>
                     <option value="2">Trung bình</option>
                     <option value="1">Cao</option>
