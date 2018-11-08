@@ -4,7 +4,7 @@ class TaskList extends Component {
   render() {
     let {data} = this.props;
     let elmItem = data.map((value, index)=> {
-      return  <TaskItem key={index} item={value} index={index}/>;
+      return  <TaskItem key={index} item={value} index={index} callUpdate={this.props.callUpdate}/>;
     });
     return (
       <div className="col-md-9 px-0">

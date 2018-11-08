@@ -18,7 +18,7 @@ class Control extends Component {
           <img src="./img/user_1.jpg" className="ml-2 user" alt="" />
           <h3 className="text-white d-inline font-weight-light ml-2">Lê Quang Song</h3>
         </div>
-        <CreateNewTask></CreateNewTask>
+        <CreateNewTask isAdd={this.props.isAdd}></CreateNewTask>
         <button type="button" className="btn btn-primary px-3" onClick={this.handleClick}>Save Data</button>
         {/* Filter */}
         <div className="px-3">

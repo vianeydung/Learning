@@ -8,7 +8,11 @@ import TaskData from './data/TasksData';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {task:null};
+    this.state = {
+      task:null,
+      updateType:0,
+      selectedItem:null
+    };
   }
   componentWillMount() {
     if("task" in localStorage){
@@ -26,6 +30,15 @@ class App extends Component {
       this.setState({task:JSON.parse(localStorage.getItem('task'))});
     }
   }
+  isAdd = () => {
+    this.setState({updateType:0});
+  }
+  callUpdate = (updateType, index) => {
+    this.setState({
+      updateType:updateType,
+      selectedItem: this.state.task[index] 
+    });
+  }
   render() {
     return (
       <div className="App">
@@ -34,13 +47,17 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             {/* PANEL */}
-            <Control></Control>
+            <Control isAdd={this.isAdd}></Control>
             {/* DISPLAY */}
-            <TaskList data={this.state.task}></TaskList>
+            <TaskList data={this.state.task} callUpdate={this.callUpdate}></TaskList>
           </div>
         </div>
         {/* The Modal */}
-        <Modal refresh={this.handleRefresh}></Modal> 
+        <Modal 
+          updateType={this.state.updateType} 
+          item={this.state.selectedItem} 
+          refresh={this.handleRefresh}>
+        </Modal> 
         </div>
       </div>
     );

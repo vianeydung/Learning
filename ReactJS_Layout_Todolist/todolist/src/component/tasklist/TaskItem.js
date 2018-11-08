@@ -54,6 +54,15 @@ class TaskItem extends Component {
         break;
     }
   }
+  updateHandle = (event) => {
+    
+    if(event.type === "click") {
+      this.props.callUpdate(1, this.props.index)
+    }
+    else if(event.type === "change") {
+      this.props.callUpdate(2, this.props.index);
+    }
+  }
   render() {
     let {item, index} = this.props;//ánh xạ đúng tên.
     let elmLabels = item.labelArr.map((value, idx) => {
@@ -84,13 +93,16 @@ class TaskItem extends Component {
           <button
             type="button"
             className="btn btn-outline-primary mt-2"
+            onClick={this.updateHandle}
+            data-toggle="modal"
+            data-target="#modalTask"
           >
             Sửa
           </button>
 
           <div className="form-group ml-2">
             <label></label>
-            <select className="form-control" id="">
+            <select className="form-control" id="" onChange={this.updateHandle}>
               <option>Chọn trạng thái</option>
               <option>Chưa bắt đầu</option>
               <option>Đang tiến hành</option>
