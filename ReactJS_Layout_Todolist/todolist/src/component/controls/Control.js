@@ -22,7 +22,7 @@ class Control extends Component {
         <button type="button" className="btn btn-primary px-3" onClick={this.handleClick}>Save Data</button>
         {/* Filter */}
         <div className="px-3">
-          <FilterProgress></FilterProgress>
+          <FilterProgress filter={this.props.filter}></FilterProgress>
           <FilterLabel></FilterLabel>
           <FilterPriority></FilterPriority>
           <Sort></Sort>

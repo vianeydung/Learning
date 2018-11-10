@@ -5,6 +5,7 @@ import Control from './component/controls/Control';
 import TaskList from './component/tasklist/TaskList';
 import Modal from './component/modal/Modal';
 import TaskData from './data/TasksData';
+import FilterType from './component/common/FilterType';
 class App extends Component {
   constructor(props){
     super(props);
@@ -12,7 +13,10 @@ class App extends Component {
       task:null,
       isAddItem:true,
       index:-1,
-      selectedItem:null
+      selectedItem:null,
+
+      //FILTER
+      filterType: FilterType.all,
     };
   }
   componentWillMount() {
@@ -31,6 +35,40 @@ class App extends Component {
       this.setState({task:JSON.parse(localStorage.getItem('task'))});
     }
   }
+
+////FILTER
+filter = (type, value) => {
+  console.log("type:" + type + " value: " + value);
+  switch (type) {
+    case FilterType.status:
+      this.filterStatus(value);
+      break;
+    case FilterType.label:
+      this.filterLabel(value);
+      break;
+    case FilterType.priority:
+      this.filterPriority(value);
+      break;
+    case FilterType.string:
+      this.filterString(value);
+      break;
+    default:
+      this.handleRefresh(true);
+      break;
+  }
+}
+filterStatus(value){
+  let data = JSON.parse(localStorage.getItem('task'));
+  let filterData = [];
+  console.log("value :" + value);
+  for (let index = 0; index < data.length; index++) {
+    console.log("status :" + data[index].status);
+    if(data[index].status === value){
+      filterData.push(data[index]);
+    }
+  }
+  this.setState({task:filterData})
+}
 
 //// update data
   isAddItem = () => {
@@ -61,7 +99,7 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             {/* PANEL */}
-            <Control isAddItem={this.isAddItem}></Control>
+            <Control isAddItem={this.isAddItem} filter={this.filter}></Control>
             {/* DISPLAY */}
             <TaskList
               data={this.state.task} 

@@ -60,7 +60,7 @@ class TaskItem extends Component {
       this.props.isEditItem(this.props.index);
     }
     else if(event.type === "change") {
-      this.props.editStatus(event.target.value, this.props.index);
+      this.props.editStatus(parseInt(event.target.value), this.props.index);
     }
   }
   render() {
@@ -102,8 +102,8 @@ class TaskItem extends Component {
 
           <div className="form-group ml-2">
             <label></label>
-            <select className="form-control" id="" onChange={this.updateHandle} value={item.status}>
-              <option value="-1">Chọn trạng thái</option>
+            <select className="form-control" id="" onChange={this.updateHandle} value={parseInt(item.status)}>
+              <option value={-1}>Chọn trạng thái</option>
               <option value="1">Chưa bắt đầu</option>
               <option value="2">Đang tiến hành</option>
               <option value="3">Đã hoàn thành</option>
