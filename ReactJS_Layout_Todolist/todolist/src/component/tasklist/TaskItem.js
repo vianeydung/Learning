@@ -40,15 +40,15 @@ class TaskItem extends Component {
     }
   }
   getStatus(status){
-    switch (status) {
+    switch (parseInt(status)) {
       case 1:
           return "fa fa-anchor";
       case 2:
           return "fa fa-spinner";
       case 3:
           return "fa fa-check-square-o";
-      case 0:
-          return "fa fa-anchor mr-2";
+      case 4:
+          return "fa fa-trash-o mr-2";
     
       default:
         break;
@@ -57,10 +57,10 @@ class TaskItem extends Component {
   updateHandle = (event) => {
     
     if(event.type === "click") {
-      this.props.callUpdate(1, this.props.index)
+      this.props.isEditItem(this.props.index);
     }
     else if(event.type === "change") {
-      this.props.callUpdate(2, this.props.index);
+      this.props.editStatus(event.target.value, this.props.index);
     }
   }
   render() {
@@ -102,12 +102,12 @@ class TaskItem extends Component {
 
           <div className="form-group ml-2">
             <label></label>
-            <select className="form-control" id="" onChange={this.updateHandle}>
-              <option>Chọn trạng thái</option>
-              <option>Chưa bắt đầu</option>
-              <option>Đang tiến hành</option>
-              <option>Đã hoàn thành</option>
-              <option>Xóa</option>
+            <select className="form-control" id="" onChange={this.updateHandle} value={item.status}>
+              <option value="-1">Chọn trạng thái</option>
+              <option value="1">Chưa bắt đầu</option>
+              <option value="2">Đang tiến hành</option>
+              <option value="3">Đã hoàn thành</option>
+              <option value="4">Xóa</option>
             </select>
           </div>
         </td>

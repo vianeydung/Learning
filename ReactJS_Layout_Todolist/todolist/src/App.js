@@ -10,7 +10,8 @@ class App extends Component {
     super(props);
     this.state = {
       task:null,
-      updateType:0,
+      isAddItem:true,
+      index:-1,
       selectedItem:null
     };
   }
@@ -30,14 +31,27 @@ class App extends Component {
       this.setState({task:JSON.parse(localStorage.getItem('task'))});
     }
   }
-  isAdd = () => {
-    this.setState({updateType:0});
-  }
-  callUpdate = (updateType, index) => {
+
+//// update data
+  isAddItem = () => {
     this.setState({
-      updateType:updateType,
+      isAddItem:true,
+    });
+  }
+  isEditItem = (index) => {
+    console.log("index = " + index);
+    this.setState({
+      isAddItem:false,
+      index:index,
       selectedItem: this.state.task[index] 
     });
+  }
+  editStatus = (value, index) => {
+    this.state.task[index].status = value;
+    localStorage.setItem('task', JSON.stringify(this.state.task));
+    if("task" in localStorage){
+      this.setState({task:JSON.parse(localStorage.getItem('task'))});
+    }
   }
   render() {
     return (
@@ -47,14 +61,19 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             {/* PANEL */}
-            <Control isAdd={this.isAdd}></Control>
+            <Control isAddItem={this.isAddItem}></Control>
             {/* DISPLAY */}
-            <TaskList data={this.state.task} callUpdate={this.callUpdate}></TaskList>
+            <TaskList
+              data={this.state.task} 
+              isEditItem={this.isEditItem}
+              editStatus={this.editStatus}>
+            </TaskList>
           </div>
         </div>
         {/* The Modal */}
         <Modal 
-          updateType={this.state.updateType} 
+          isAddItem={this.state.isAddItem} 
+          index={this.state.index} 
           item={this.state.selectedItem} 
           refresh={this.handleRefresh}>
         </Modal> 

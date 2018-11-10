@@ -16,22 +16,42 @@ class Modal extends Component {
     };
   }
   
+  componentWillMount() {
+    
+  }
+  
+  componentWillReceiveProps = (nextProps) => {
+    if(nextProps) {
+      let isAddItem = nextProps.isAddItem;
+      if(!isAddItem) {
+        this.setState(nextProps.item);
+      }
+      console.log(this.state);
+    }
+    
+  }
+  
   onSubmit = (event) => {
     //event.preventDefault();
-    let data = TasksData;
+    let data = null;
     if("task" in localStorage){
       data = JSON.parse(localStorage.getItem('task'));
     } 
-    
-    data.push(this.state);
+    else {
+      data = TasksData;
+    }
+    let isAddItem = this.props.isAddItem;
+    if(isAddItem){
+      data.push(this.state);
+    }
+    else {
+      data[this.props.index] = this.state;
+    }
     localStorage.setItem('task', JSON.stringify(data));//update data to store(local storage)
     this.props.refresh(true);
-    //console.log(data);
   }
   
   onChange = (event) => {
-    //console.log(event.target.name);
-    //console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -54,11 +74,7 @@ class Modal extends Component {
     //console.log(this.state.labelArr);
   }
   render() {
-    let isNewTask = (this.props.updateType===0?true:false);
-    let item = this.state;
-    if(!isNewTask) {
-      item = this.props.item;
-    }
+    let isAddItem = this.props.isAddItem;
     return (
       <div className="modal fade" id="modalTask">
         <div className="modal-dialog modal-lg">
@@ -66,25 +82,25 @@ class Modal extends Component {
             <form onSubmit={this.onSubmit}>
               {/* Modal Header */}
               <div className="modal-header">
-                <h4 className="modal-title">{isNewTask?"Thêm công việc":"Sửa công việc"}</h4>
+                <h4 className="modal-title">{isAddItem?"Thêm công việc":"Sửa công việc"}</h4>
                 <button type="button" className="close" data-dismiss="modal">×</button>
               </div>
               {/* Modal body */}
               <div className="modal-body">
                 <div className="form-group">
                   <label htmlFor="taskName">Tên công việc:</label>
-                  <input type="text" className="form-control" id="taskName" onChange={this.onChange} name="name" value={item.name}/>
+                  <input type="text" className="form-control" id="taskName" onChange={this.onChange} name="name" value={this.state.name}/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="description">Mô tả:</label>
                   <textarea className="form-control" rows={2} id="description" 
-                  defaultValue={""} onChange={this.onChange} name="description" value={item.description}/>
+                  onChange={this.onChange} name="description" value={this.state.description}/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="priority">Độ ưu tiên:</label>
                   <select className="form-control" id="priority"  
                     onChange={this.onPriorityChange} 
-                    value={item.priority}
+                    value={this.state.priority}
                     name="priority">
                     <option value={-1}>Chọn độ ưu tiên</option>
                     <option value={3}>Thấp</option>
@@ -97,7 +113,7 @@ class Modal extends Component {
                 <CheckboxGroup
                   checkboxDepth={2} // This is needed to optimize the checkbox group
                   name="memberIDArr"
-                  value={item.memberIDArr}
+                  value={this.state.memberIDArr}
                   onChange={this.memberChanged}>
                   <label className="mr-2"><Checkbox value="user_2"/>Nghĩa Văn</label>
                   <label className="mr-2"><Checkbox value="user_3"/>Minh Tuấn</label>
@@ -110,7 +126,7 @@ class Modal extends Component {
                 <CheckboxGroup
                   checkboxDepth={2} // This is needed to optimize the checkbox group
                   name="labelArr"
-                  value={item.labelArr}
+                  value={this.state.labelArr}
                   onChange={this.labelChanged}>
                   <label className="mr-2"><Checkbox value="Frontend"/>Frontend</label>
                   <label className="mr-2"><Checkbox value="Backend"/>Backend</label>
@@ -120,7 +136,7 @@ class Modal extends Component {
               </div>
               {/* Modal footer */}
               <div className="modal-footer">
-                <button type="submit" className="btn btn-primary" value="submit">{isNewTask?"Add Task":"Sửa Task"}</button>
+                <button type="submit" className="btn btn-primary" value="submit">{isAddItem?"Add Task":"Sửa Task"}</button>
                 <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </form>

@@ -8,7 +8,7 @@ class CreateNewTask extends Component {
               className="btn my-3 btn--newTask"
               data-toggle="modal"
               data-target="#modalTask"
-              onClick={this.props.isAdd}
+              onClick={this.props.isAddItem}
             >
         <i className="fa fa-pencil-square-o" />
         Tạo Task mới
