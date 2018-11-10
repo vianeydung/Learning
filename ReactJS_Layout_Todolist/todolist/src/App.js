@@ -69,6 +69,41 @@ filterStatus(value){
   }
   this.setState({task:filterData})
 }
+filterLabel(value){
+  let data = JSON.parse(localStorage.getItem('task'));
+  let filterData = [];
+  for (let index = 0; index < data.length; index++) {
+    if(data[index].labelArr.indexOf(value) > -1){
+      filterData.push(data[index]);
+    }
+  }
+  this.setState({task:filterData})
+}
+filterString(value){
+  let data = JSON.parse(localStorage.getItem('task'));
+  let filterData = [];
+  for (let index = 0; index < data.length; index++) {
+    if(data[index].name.indexOf(value) > -1){
+      filterData.push(data[index]);
+    }
+  }
+  this.setState({task:filterData})
+}
+filterPriority(value){
+  if(value === -1)
+  {
+    this.handleRefresh(true);
+    return;
+  }
+  let data = JSON.parse(localStorage.getItem('task'));
+  let filterData = [];
+  for (let index = 0; index < data.length; index++) {
+    if(data[index].priority === value){
+      filterData.push(data[index]);
+    }
+  }
+  this.setState({task:filterData})
+}
 
 //// update data
   isAddItem = () => {
@@ -104,7 +139,9 @@ filterStatus(value){
             <TaskList
               data={this.state.task} 
               isEditItem={this.isEditItem}
-              editStatus={this.editStatus}>
+              editStatus={this.editStatus}
+              filter={this.filter}
+              >
             </TaskList>
           </div>
         </div>

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import TaskItem from './TaskItem';
+import FilterType from '../common/FilterType';
 class TaskList extends Component {
+  onChange = (e) => {
+    this.props.filter(FilterType.string, e.target.value);
+  }
   render() {
     let {data} = this.props;
     let elmItem = data.map((value, index)=> {
@@ -25,6 +29,7 @@ class TaskList extends Component {
                           type="text"
                           className="form-control"
                           placeholder="Tìm kiếm công việc"
+                          onChange={this.onChange}
                         />
                       </div>
                     </div>

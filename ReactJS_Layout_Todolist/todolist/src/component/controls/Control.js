@@ -23,8 +23,8 @@ class Control extends Component {
         {/* Filter */}
         <div className="px-3">
           <FilterProgress filter={this.props.filter}></FilterProgress>
-          <FilterLabel></FilterLabel>
-          <FilterPriority></FilterPriority>
+          <FilterLabel filter={this.props.filter}></FilterLabel>
+          <FilterPriority filter={this.props.filter}></FilterPriority>
           <Sort></Sort>
         </div>
       </div>
