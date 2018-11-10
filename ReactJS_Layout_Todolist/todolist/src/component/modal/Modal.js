@@ -26,7 +26,6 @@ class Modal extends Component {
       if(!isAddItem) {
         this.setState(nextProps.item);
       }
-      console.log(this.state);
     }
     
   }
@@ -65,13 +64,11 @@ class Modal extends Component {
     this.setState({
       memberIDArr: newValue
     });
-    console.log(this.state.memberIDArr);
   }
   labelChanged = (newValue) => {
     this.setState({
       labelArr: newValue
     });
-    //console.log(this.state.labelArr);
   }
   render() {
     let isAddItem = this.props.isAddItem;

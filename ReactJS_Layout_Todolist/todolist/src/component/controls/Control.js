@@ -8,7 +8,6 @@ class Control extends Component {
   handleClick = (event) => {
     //event.preventDefault();
     //localStorage.setItem('task', JSON.stringify(data));
-    console.log("saved data");
   }
   render() {
     //let data = {data};
@@ -25,7 +24,7 @@ class Control extends Component {
           <FilterProgress filter={this.props.filter}></FilterProgress>
           <FilterLabel filter={this.props.filter}></FilterLabel>
           <FilterPriority filter={this.props.filter}></FilterPriority>
-          <Sort></Sort>
+          <Sort sortTask={this.props.sortTask}></Sort>
         </div>
       </div>
     );

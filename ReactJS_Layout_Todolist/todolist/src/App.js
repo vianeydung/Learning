@@ -28,7 +28,6 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    console.log(this.state.task);
   }
   handleRefresh = (value) => {
     if(value && ("task" in localStorage)){
@@ -38,7 +37,6 @@ class App extends Component {
 
 ////FILTER
 filter = (type, value) => {
-  console.log("type:" + type + " value: " + value);
   switch (type) {
     case FilterType.status:
       this.filterStatus(value);
@@ -60,14 +58,12 @@ filter = (type, value) => {
 filterStatus(value){
   let data = JSON.parse(localStorage.getItem('task'));
   let filterData = [];
-  console.log("value :" + value);
   for (let index = 0; index < data.length; index++) {
-    console.log("status :" + data[index].status);
     if(data[index].status === value){
       filterData.push(data[index]);
     }
   }
-  this.setState({task:filterData})
+  this.setState({task:filterData});
 }
 filterLabel(value){
   let data = JSON.parse(localStorage.getItem('task'));
@@ -77,7 +73,7 @@ filterLabel(value){
       filterData.push(data[index]);
     }
   }
-  this.setState({task:filterData})
+  this.setState({task:filterData});
 }
 filterString(value){
   let data = JSON.parse(localStorage.getItem('task'));
@@ -87,7 +83,7 @@ filterString(value){
       filterData.push(data[index]);
     }
   }
-  this.setState({task:filterData})
+  this.setState({task:filterData});
 }
 filterPriority(value){
   if(value === -1)
@@ -102,7 +98,30 @@ filterPriority(value){
       filterData.push(data[index]);
     }
   }
-  this.setState({task:filterData})
+  this.setState({task:filterData});
+}
+
+///Sort Task
+sortTask = (value) => {
+  if(value === -1)
+    this.handleRefresh(true);
+  let sortTasks = this.state.task;
+  if(value === 1) {
+    sortTasks.sort((a, b) => {
+      let x = a.name.toLowerCase();
+      let y = b.name.toLowerCase();
+      if (x > y) return 1;
+      if (x < y) return -1;
+    })
+  }
+  else if(value === 2) {
+    sortTasks.sort((a, b) => {
+      let x = a.name.toLowerCase();
+      let y = b.name.toLowerCase();
+      if (x < y) return 1;
+      if (x > y) return -1;
+    })
+  }
 }
 
 //// update data
@@ -112,7 +131,6 @@ filterPriority(value){
     });
   }
   isEditItem = (index) => {
-    console.log("index = " + index);
     this.setState({
       isAddItem:false,
       index:index,
@@ -134,7 +152,7 @@ filterPriority(value){
         <div className="container-fluid">
           <div className="row">
             {/* PANEL */}
-            <Control isAddItem={this.isAddItem} filter={this.filter}></Control>
+            <Control isAddItem={this.isAddItem} filter={this.filter} sortTask={this.sortTask}></Control>
             {/* DISPLAY */}
             <TaskList
               data={this.state.task} 
