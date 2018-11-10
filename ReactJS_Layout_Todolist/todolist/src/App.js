@@ -122,6 +122,7 @@ sortTask = (value) => {
       if (x > y) return -1;
     })
   }
+  this.setState({task:sortTasks});
 }
 
 //// update data
